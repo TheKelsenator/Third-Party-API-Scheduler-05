@@ -5,6 +5,13 @@ body {
 
 header {
   text-align: center;
+  border-bottom: 10px solid black;
+}
+
+.hourCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 textarea {
@@ -22,6 +29,7 @@ textarea {
 
 .time-block {
   border-radius: 15px;
+  padding: 5px;
 }
 
 .row {
@@ -60,4 +68,8 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+footer {
+  padding-bottom: 100px;
 }
