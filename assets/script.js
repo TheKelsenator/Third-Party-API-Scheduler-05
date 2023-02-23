@@ -79,7 +79,6 @@ function displayTime() {
 // TODO: Add code to get any user input that was saved in localStorage and set
 // the values of the corresponding textarea elements. HINT: How can the id
 // attribute of each time-block be used to do this?
-
 function saveTasks() {
   localStorage.setItem("businessHours", JSON.stringify(businessHours));
 }
@@ -105,40 +104,29 @@ function init() {
 // attribute of each time-block be used to conditionally add or remove the
 // past, present, and future classes? How can Day.js be used to get the
 // current hour in 24-hour time?
-
+let currentHour = dayjs().hour();
 
 businessHours.forEach(function (thisHour) {
+  let colorCode 
+  if (currentHour > thisHour.time) {
+    colorCode = "past";
+  } else if (currentHour+"" === thisHour.time) {
+    colorCode = "present";
+  } else {
+    colorCode = "future";
+  }
+
   whole.append(`<div class="container-fluid px-5">
-                  <div id=${thisHour.id} class="row time-block">
-                    <div class="col-2 col-md-1 center py-3">${thisHour.hour} ${thisHour.ampm}</div>
-                    <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+                  <div id=${thisHour.id} class="time-block row">
+                    <div class="hour col-2 col-md-1 py-3 ${colorCode}">${thisHour.hour} ${thisHour.ampm}</div>
+                    <textarea class="col-8 col-md-10 description ${colorCode}" rows="3"></textarea>
                     <button class="btn saveBtn col-2 col-md-1" aria-label="save">
                     <i class="fas fa-save" aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>`)
+  
 })
-
-pastPresentFuture();
-
-let c = moment();
-let currentHour = c.hour();
-
-function pastPresentFuture() {
-  displayHours.each(function () {
-    var hourOptions = parseInt(businessHours.val("hour"));
-        if (hourOptions < currentHour) {
-            $(this).addClass("past");
-            $(this).removeClass("present", "future");
-        } else if (hourOptions === currentHour) {
-            $(this).addClass("present");
-            $(this).removeClass("past", "future");
-        } else {
-            $(this).addClass("future");
-            $(this).removeClass("past", "present");
-        };
-  })
-}
 
 // TODO: Add a listener for click events on the save button. This code should
 // use the id in the containing time-block as a key to save the user input in
