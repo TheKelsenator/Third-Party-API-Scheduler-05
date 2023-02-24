@@ -68,7 +68,7 @@ var businessHours = [
   },
 ];
 
-// Add code to display the current date in the header of the page.
+// Code to display the current date in the header of the page.
 displayTime();
 
 function displayTime() {
@@ -76,9 +76,8 @@ function displayTime() {
   timeDisplayEl.text(rightNow);
 }
 
-// TODO: Add code to get any user input that was saved in localStorage and set
-// the values of the corresponding textarea elements. HINT: How can the id
-// attribute of each time-block be used to do this?
+// Code to get any user input that was saved in localStorage and set
+// the values of the corresponding textarea elements.
 function saveTasks() {
   localStorage.setItem("businessHours", JSON.stringify(businessHours));
 }
@@ -99,14 +98,9 @@ function init() {
   displayTasks();
 }
 
-// TODO: Add code to apply the past, present, or future class to each time
-// block by comparing the id to the current hour. HINTS: How can the id
-// attribute of each time-block be used to conditionally add or remove the
-// past, present, and future classes? How can Day.js be used to get the
-// current hour in 24-hour time?
-// let currentHour = dayjs().hour();
-
-let currentHour = 11;
+// Code to apply the past, present, or future class to each time
+// block by comparing the id to the current hour. 
+let currentHour = dayjs().hour();
 
 businessHours.forEach(function (thisHour) {
   let colorCode 
