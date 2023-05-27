@@ -39,4 +39,4 @@ Full-Stack Web Development Coding Bootcamp
 
 ## Application Link
 
-https://thekelsenator.github.io/red-pen-cap-05/
+https://thekelsenator.github.io/Third-Party-API-Scheduler-05/
