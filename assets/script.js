@@ -79,24 +79,31 @@ function displayTime() {
 // Code to get any user input that was saved in localStorage and set
 // the values of the corresponding textarea elements.
 function saveTasks() {
-  localStorage.setItem("businessHours", JSON.stringify(businessHours));
+  var x = $(this).parent().attr("id")
+  var y = $(this).siblings(".description").val();
+  localStorage.setItem(x, y);
 }
 
 function displayTasks() {
   businessHours.forEach(function (_thisHour) {
     $(`#${_thisHour.id}`).val(_thisHour.task);
+    console.log($(`#${_thisHour.id}`).val(_thisHour.task));
   })
 }
 
 function init() {
-  var storedData = JSON.parse(localStorage.getItem("businessHours"));
-  if (storedData) {
-    businessHours = storedData;
-  }
+  $(".time-block").each(function() {
+    var x = $(this).attr("id");
+    $(this).children(".description").val(localStorage.getItem(x));
+  })
+ // if (storedData) {
+ //   businessHours = storedData;
+ // }
 
-  saveTasks();
-  displayTasks();
+ // saveTasks();
+  //displayTasks();
 }
+
 
 // Code to apply the past, present, or future class to each time
 // block by comparing the id to the current hour. 
@@ -115,9 +122,12 @@ businessHours.forEach(function (thisHour) {
   whole.append(`<div class="container-fluid px-5">
                   <div id=${thisHour.id} class="time-block row">
                     <div class="hour col-2 col-md-1 py-3 ${colorCode}">${thisHour.hour} ${thisHour.ampm}</div>
-                    <textarea class="col-8 col-md-10 description ${colorCode}" rows="3"></textarea>
+                    <textarea class="col-8 col-md-9 description ${colorCode}" rows="3"></textarea>
                     <button class="btn saveBtn col-2 col-md-1" aria-label="save">
                     <i class="fas fa-save" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn trashBtn col-2 col-md-1" aria-label="save">
+                    <i class="fas fa-trash" aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>`)
@@ -130,3 +140,10 @@ businessHours.forEach(function (thisHour) {
 // function? How can DOM traversal be used to get the "hour-x" id of the
 // time-block containing the button that was clicked? How might the id be
 // useful when saving the description in local storage?
+// $(".saveBtn").on("click", function() {
+//   console.log($(this).siblings(".description").val());
+// })
+
+$(".saveBtn").on("click", saveTasks)
+init()
+
